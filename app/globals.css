@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  HERBEAT DESIGN TOKENS
+  Palette sampled directly from the HerBeat logo: the orbital ribbons
+  run deep violet -> mid purple -> lavender, with a near-black serif
+  wordmark.
+
+  Phase colors sit on that same violet spine so the product reads as
+  one brand, with two deliberate departures for data clarity:
+    flow      = berry   (bleeding days must read as distinct)
+    ovulation = orchid  (the peak should be the brightest point)
+*/
+:root {
+  --canvas: #faf8fc;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #1a1a1a;
+  --ink-soft: #625a6b;
+  --ink-faint: #9a90a4;
+  --line: #e9e2f1;
+
+  --violet-deep: #4e2a84;
+  --violet: #7e57a8;
+  --violet-light: #b9a3d3;
+  --violet-mist: #ede7f5;
+
+  --flow: #b33a6e;
+  --flow-soft: #fae6ee;
+  --follicular: #7e57a8;
+  --follicular-soft: #ede7f5;
+  --ovulation: #c77bd8;
+  --ovulation-soft: #f7e9fa;
+  --luteal: #4e2a84;
+  --luteal-soft: #e6e0f0;
+
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+.dark {
+  --canvas: #120d1a;
+  --surface: #1a1424;
+  --surface-raised: #221930;
+  --ink: #f4f0f8;
+  --ink-soft: #b4a8c2;
+  --ink-faint: #756a82;
+  --line: #2e2340;
+
+  --violet-deep: #8b6bc4;
+  --violet: #9b7ed0;
+  --violet-light: #c7b5e2;
+  --violet-mist: #241b33;
+
+  --flow: #d95a8c;
+  --flow-soft: #381f2c;
+  --follicular: #9b7ed0;
+  --follicular-soft: #241b33;
+  --ovulation: #d894e8;
+  --ovulation-soft: #33203a;
+  --luteal: #8b6bc4;
+  --luteal-soft: #241b33;
+}
+
+* { border-color: var(--line); }
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--violet-mist); color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* The pulse trace - HerBeat's signature element. */
+.pulse-line {
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: drawPulse 2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes drawPulse { to { stroke-dashoffset: 0; } }
